@@ -147,9 +147,12 @@
   private void Buscar(){
 
   }
-   private void Nuevo(){
-
-  }
+private void Nuevo(){
+    clienteId = string.Empty;
+    cobro = new Cobro();
+    listaClientes = new List<Clientes>();
+    listaDuedas = new List<Ventas>();
+}
 
    private void Eliminar(){
 
@@ -184,7 +187,7 @@
 
         if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
          
-          
+          monto = venta.Balance;
 
       }else{
            monto = 0;
