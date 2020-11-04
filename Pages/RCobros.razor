@@ -1,5 +1,5 @@
 @page "/Cobros"
-
+@inject IToastService toast
 
 <EditForm Model="cobro"  OnValidSubmit="Guardar">
   <DataAnnotationsValidator />
@@ -67,7 +67,7 @@
                             <td>@ObtenerMonto(item)</td>
                             <td><input type="checkbox" @onclick="()=>Pagar(item)" class="form-control"/></td>
                         </tr>
-                        totalDeuda += item.Balance;
+                    
                       
                     }
                   
@@ -77,8 +77,8 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>Total Deuda </label>
-                   <input Value="@totalDeuda" class="form-control" readonly />
+                    <label>Totales </label>
+                   <input value="@cobro.detalle.Where(c => c.CobroDetalleId == 0).Count()"   class="form-control" readonly />
                 </div>
                  <div class="offset-md-3 col-md-4">
                      <label>Monto que esta pagando</label>
@@ -112,6 +112,7 @@
         </div>
     </div>
 </EditForm>
+<BlazoredToasts />
 
 
 @code{
@@ -120,7 +121,6 @@
   private string clienteId = string.Empty;
   List<Clientes> listaClientes = new List<Clientes>();
   List<Ventas> listaDuedas = new List<Ventas>();
-  double totalDeuda = 0;
   //List <double> pago = new List<double>();
 
    protected override void OnInitialized()
@@ -131,7 +131,17 @@
 
 
   private void Guardar(){
+      bool guardo;
 
+        guardo = CobrosBLL.Guardar(cobro);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado exitoso!");
+        }
+        else
+            toast.ShowError("No Guardado!");
   }
 
   private void Buscar(){
@@ -147,8 +157,6 @@
 
    private void selectCliente(ChangeEventArgs e){
     clienteId = e.Value.ToString();
-    totalDeuda = 0;
-   
     listaDuedas = ClienteBLL.GetVentas(clienteId);
     //cobro.ClienteId =  clienteId;
       
@@ -171,6 +179,7 @@
  }
 
    private double ObtenerMonto(Ventas venta){
+      
        double monto = 0;
 
         if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
