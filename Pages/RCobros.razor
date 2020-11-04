@@ -155,24 +155,31 @@
   }
 
   private void Pagar(Ventas venta){
+      //falta validar el balance
       CobroDetalle cobroDetalle = new CobroDetalle();
       cobroDetalle.VentaId = venta.VentaId;
       cobroDetalle.MontoVenta = venta.Monto;
       cobroDetalle.Cobrado = venta.Balance;
       if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
-          cobro.detalle.Remove(cobroDetalle);
+          cobro.detalle.Remove(cobro.detalle.Find(c=> c.VentaId == venta.VentaId));
+          cobro.MontoCobrado = cobro.MontoCobrado - venta.Balance;
+         
       }else{
           cobro.detalle.Add(cobroDetalle);
+          cobro.MontoCobrado += venta.Balance;
       }
-  }
+ }
 
    private double ObtenerMonto(Ventas venta){
        double monto = 0;
 
         if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
-          monto = venta.Balance;
+         
+          
+
       }else{
            monto = 0;
+           
       }
     return monto;
    }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj": {}
+    "C:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj": {}
   },
   "projects": {
-    "c:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj": {
+    "C:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
+        "projectUniqueName": "C:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
         "projectName": "CobrosParcial",
-        "projectPath": "c:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
+        "projectPath": "C:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
         "packagesPath": "C:\\Users\\Lewis Gaby\\.nuget\\packages\\",
-        "outputPath": "c:\\Aplicada2\\CobrosParcial\\obj\\",
+        "outputPath": "C:\\Aplicada2\\CobrosParcial\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

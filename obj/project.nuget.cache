@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bc//TBHBS4cyYCMVcJ7zpMpvYSrJ7L9QgqgqEGOaE8AmXEBgl6WR0IgDzw0Hus2Xt77+MJG1Me+nz5cCenu6tA==",
+  "dgSpecHash": "09kJzuAf0qrPHbFDgdcRug/+re15mqWV81Ti4OjGNWm3uGUY8jEW5YNpquHqZcQ+R5ORaiFyn/2U4owUsNzooA==",
   "success": true,
-  "projectFilePath": "c:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
+  "projectFilePath": "C:\\Aplicada2\\CobrosParcial\\CobrosParcial.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lewis Gaby\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Lewis Gaby\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
