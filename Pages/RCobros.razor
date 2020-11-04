@@ -64,8 +64,8 @@
                             <td>@item.Fecha</td>
                             <td>@item.Monto</td>
                             <td>@item.Balance</td>
-                            <td><input type="number"  class="form-control"/></td>
-                            <td><input type="checkbox" @onclick="CalculaTotalCobrar(item.Balance)" class="form-control"/></td>
+                            <td>@ObtenerMonto(item)</td>
+                            <td><input type="checkbox" @onclick="()=>Pagar(item)" class="form-control"/></td>
                         </tr>
                         totalDeuda += item.Balance;
                       
@@ -117,13 +117,11 @@
 @code{
 
   Cobro cobro = new Cobro();
-  string prueba;
-  int prueba1;
   private string clienteId = string.Empty;
   List<Clientes> listaClientes = new List<Clientes>();
   List<Ventas> listaDuedas = new List<Ventas>();
   double totalDeuda = 0;
-  List <double> pago = new List<double>();
+  //List <double> pago = new List<double>();
 
    protected override void OnInitialized()
     {
@@ -156,7 +154,26 @@
       
   }
 
-  private void CalculaTotalCobrar(double balance){
-      cobro.detalle.Add(new CobroDetalle());
+  private void Pagar(Ventas venta){
+      CobroDetalle cobroDetalle = new CobroDetalle();
+      cobroDetalle.VentaId = venta.VentaId;
+      cobroDetalle.MontoVenta = venta.Monto;
+      cobroDetalle.Cobrado = venta.Balance;
+      if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
+          cobro.detalle.Remove(cobroDetalle);
+      }else{
+          cobro.detalle.Add(cobroDetalle);
+      }
   }
+
+   private double ObtenerMonto(Ventas venta){
+       double monto = 0;
+
+        if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
+          monto = venta.Balance;
+      }else{
+           monto = 0;
+      }
+    return monto;
+   }
 }
