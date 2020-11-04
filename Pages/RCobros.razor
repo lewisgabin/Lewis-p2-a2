@@ -1,0 +1,162 @@
+@page "/Cobros"
+
+
+<EditForm Model="cobro"  OnValidSubmit="Guardar">
+  <DataAnnotationsValidator />
+    <div class="card">
+   
+        <div class="card-header">
+            <h3>Cobrar de Factura</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <div class="input-group">
+                            <InputNumber  @bind-Value="cobro.CobroId" class="form-control col-4" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">
+                                    <span class="oi oi-zoom-in"></span> Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="LoanDatePicker">Fecha </label>
+                   <InputDate @bind-Value="cobro.Fecha" class="form-control" id="LoanDatePicker" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="margin-bottom: 25px;">
+                    <label>Cliente</label>
+                    <select  @onchange="selectCliente" class="form-control">
+                        <option value="0">Elige el Cliente</option>
+                        @foreach (var item in listaClientes)
+                        {
+                            <option value="@item.ClienteId">@item.Nombres</option>
+                        }
+                    </select>
+                   
+                </div>
+
+            </div>
+            <div class="row" style="margin-bottom: 25px;">
+             <table class="table" style="border-bottom: 1px groove;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Opcion</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Cobrado</th>
+                            <th scope="col">Pagar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in listaDuedas)
+                    {
+                        <tr>
+                            <td>Opcion</td>
+                            <td>@item.VentaId</td>
+                            <td>@item.Fecha</td>
+                            <td>@item.Monto</td>
+                            <td>@item.Balance</td>
+                            <td><input type="number"  class="form-control"/></td>
+                            <td><input type="checkbox" @onclick="CalculaTotalCobrar(item.Balance)" class="form-control"/></td>
+                        </tr>
+                        totalDeuda += item.Balance;
+                      
+                    }
+                  
+                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Total Deuda </label>
+                   <input Value="@totalDeuda" class="form-control" readonly />
+                </div>
+                 <div class="offset-md-3 col-md-4">
+                     <label>Monto que esta pagando</label>
+                     <InputNumber  @bind-Value="cobro.MontoCobrado" readonly class="form-control col-4" />
+
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-6">
+            <label>Observaciones</label>
+                <textarea  @bind="cobro.Observaciones" class="form-control" rows="5">
+                </textarea>
+            </div>
+        </div>
+        </div>
+         <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">
+                    <span class="oi oi-plus"></span> Nuevo
+                </button>
+
+                <button type="submit" class="btn btn-lg btn-success">
+                    <span class="oi oi-clipboard" aria-hidden="true"></span> Guardar
+                </button>
+
+                <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">
+                    <span class="oi oi-trash"></span>   Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+@code{
+
+  Cobro cobro = new Cobro();
+  string prueba;
+  int prueba1;
+  private string clienteId = string.Empty;
+  List<Clientes> listaClientes = new List<Clientes>();
+  List<Ventas> listaDuedas = new List<Ventas>();
+  double totalDeuda = 0;
+  List <double> pago = new List<double>();
+
+   protected override void OnInitialized()
+    {
+      
+        listaClientes = ClienteBLL.GetList(x => true);
+    }
+
+
+  private void Guardar(){
+
+  }
+
+  private void Buscar(){
+
+  }
+   private void Nuevo(){
+
+  }
+
+   private void Eliminar(){
+
+  }
+
+   private void selectCliente(ChangeEventArgs e){
+    clienteId = e.Value.ToString();
+    totalDeuda = 0;
+   
+    listaDuedas = ClienteBLL.GetVentas(clienteId);
+    //cobro.ClienteId =  clienteId;
+      
+  }
+
+  private void CalculaTotalCobrar(double balance){
+      cobro.detalle.Add(new CobroDetalle());
+  }
+}
