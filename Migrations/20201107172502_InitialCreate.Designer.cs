@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CobrosParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201104173214_InitialCreate")]
+    [Migration("20201107172502_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

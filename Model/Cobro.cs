@@ -11,12 +11,17 @@ namespace CobrosParcial.Model
     {
         [Key]
         public int CobroId { get; set; }
+
         public DateTime Fecha { get; set; }
+
         public double MontoCobrado { get; set; }
+
         public string Observaciones { get; set; }
+
         [ForeignKey("ClienteId")]
         public int ClienteId { set; get; }
         public Clientes clientes { get; set; }
+
         [ForeignKey("CobroId")]
         public virtual List<CobroDetalle> detalle { get; set; } = new List<CobroDetalle>(); 
     }

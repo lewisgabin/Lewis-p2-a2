@@ -6,7 +6,6 @@ C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\CobrosParcial.MvcApplicationP
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\CobrosParcial.RazorComponent.input.cache
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\App.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
-C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\RCobros.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
@@ -68,7 +67,6 @@ C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\CobrosParcial.TagHelpers.outp
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\CobrosParcial.RazorCoreGenerate.cache
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\App.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
-C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\RCobros.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Shared\NavMenu.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Shared\SurveyPrompt.razor.g.cs
@@ -98,3 +96,5 @@ C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\CDeuda
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\CDeudas.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\CCobros.razor.g.cs
 C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\CCobros.razor.g.cs
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\RCobross.razor.g.cs
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\RCobross.razor.g.cs

@@ -1,0 +1,232 @@
+@page "/Cobros"
+@inject IToastService toast
+
+
+<EditForm Model="cobro"  OnValidSubmit="Guardar">
+	<DataAnnotationsValidator />
+	<div class="card">
+		<div class="card-header">
+			<h3>Cobrar de Factura</h3>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>ID</label>
+						<div class="input-group">
+							<InputNumber  @bind-Value="cobro.CobroId" class="form-control col-4" />
+							<div class="input-group-append">
+								<button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">
+									<span class="oi oi-zoom-in"></span> Buscar
+                                
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="LoanDatePicker">Fecha </label>
+					<InputDate @bind-Value="cobro.Fecha" class="form-control" id="LoanDatePicker" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6" style="margin-bottom: 25px;">
+					<label>Cliente</label>
+					<select  @onchange="selectCliente" class="form-control">
+						<option value="0">Elige el Cliente</option>
+                        @foreach (var item in listaClientes)
+                        {
+                            
+						<option value="@item.ClienteId">@item.Nombres</option>
+                        }
+                    
+					</select>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom: 25px;">
+				<table class="table" style="border-bottom: 1px groove;">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Opcion</th>
+							<th scope="col">Id</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Monto</th>
+							<th scope="col">Balance</th>
+							<th scope="col">Cobrado</th>
+							<th scope="col">Pagar</th>
+						</tr>
+					</thead>
+					<tbody>
+                    @foreach (var item in listaDuedas)
+                    {
+                        
+						<tr>
+							<td>Opcion</td>
+							<td>@item.VentaId</td>
+							<td>@item.Fecha</td>
+							<td>@item.Monto</td>
+							<td>@item.Balance</td>
+							<td>@ObtenerMonto(item)</td>
+                           @if(item.Balance > 0){
+                            
+							<td>
+								<input type="checkbox" @onclick="()=>Pagar(item)" class="form-control"/>
+							</td>
+                           }else{
+                               
+							<td>Pagada</td>
+                           }
+                           
+
+                            
+                        
+						</tr>
+                    
+                      
+                    }
+                  
+                      
+                    
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Totales </label>
+					<input value="@cobro.detalle.Where(c => c.CobroDetalleId == 0).Count()"   class="form-control" readonly />
+				</div>
+				<div class="offset-md-3 col-md-4">
+					<label>Monto que esta pagando</label>
+					<InputNumber  @bind-Value="cobro.MontoCobrado" readonly class="form-control col-4" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<label>Observaciones</label>
+					<textarea  @bind="cobro.Observaciones" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer">
+			<div class="form-group text-center" display: inline-block>
+				<button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">
+					<span class="oi oi-plus"></span> Nuevo
+                
+				</button>
+				<button type="submit" class="btn btn-lg btn-success">
+					<span class="oi oi-clipboard" aria-hidden="true"></span> Guardar
+                
+				</button>
+				<button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">
+					<span class="oi oi-trash"></span>   Eliminar
+                
+				</button>
+			</div>
+		</div>
+	</div>
+</EditForm>
+<BlazoredToasts />
+
+
+@code{
+
+  Cobro cobro = new Cobro();
+  private string clienteId = string.Empty;
+  List<Clientes> listaClientes = new List<Clientes>();
+  List<Ventas> listaDuedas = new List<Ventas>();
+  //List <double> pago = new List<double>();
+
+   protected override void OnInitialized()
+    {
+      
+        listaClientes = ClienteBLL.GetList(x => true);
+    }
+
+
+  private void Guardar(){
+      bool guardo;
+
+    if(cobro.MontoCobrado > 0){
+        guardo = CobrosBLL.Guardar(cobro);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado exitoso!");
+        }
+        else
+            toast.ShowError("No Guardado!");
+    }else{
+
+         toast.ShowError("El monto a cobrar debe ser mayor a cero!");
+    }
+  }
+
+  private void Buscar(){
+    var clienteBuscar = CobrosBLL.Buscar(cobro.CobroId);
+
+        if (clienteBuscar  != null) {
+            cobro = clienteBuscar ;
+        } else {
+            toast.ShowWarning("No encontrado");
+            Nuevo();
+        }
+  }
+private void Nuevo(){
+    clienteId = string.Empty;
+    cobro = new Cobro();
+    listaDuedas = new List<Ventas>();
+    listaClientes = ClienteBLL.GetList(x => true);
+}
+
+   private void Eliminar(){
+       bool elimino;
+       if(cobro.CobroId > 0){
+          elimino = CobrosBLL.Eliminar(cobro.CobroId);
+           if(elimino){
+               Nuevo();
+               toast.ShowSuccess("Elimino con exitoso!");
+           }
+       }else{
+           toast.ShowWarning("Busque el cobro primero.");
+       }
+  }
+
+   private void selectCliente(ChangeEventArgs e){
+    clienteId = e.Value.ToString();
+    listaDuedas = ClienteBLL.GetVentas(clienteId);
+    cobro.ClienteId = Int32.Parse(clienteId);
+      
+  }
+
+  private void Pagar(Ventas venta){
+      //falta validar el balance
+      CobroDetalle cobroDetalle = new CobroDetalle();
+      cobroDetalle.VentaId = venta.VentaId;
+      cobroDetalle.MontoVenta = venta.Monto;
+      cobroDetalle.Cobrado = venta.Balance;
+      if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
+          cobro.detalle.Remove(cobro.detalle.Find(c=> c.VentaId == venta.VentaId));
+          cobro.MontoCobrado = cobro.MontoCobrado - venta.Balance;
+         
+      }else{
+          cobro.detalle.Add(cobroDetalle);
+          cobro.MontoCobrado += venta.Balance;
+      }
+ }
+
+   private double ObtenerMonto(Ventas venta){
+      
+       double monto = 0;
+
+        if(cobro.detalle.Exists(c=> c.VentaId == venta.VentaId)){
+         
+          monto = venta.Balance;
+
+      }else{
+           monto = 0;
+           
+      }
+    return monto;
+   }
+}
