@@ -94,3 +94,7 @@ C:\Aplicada2\CobrosParcial\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Componen
 C:\Aplicada2\CobrosParcial\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Components.Web.dll
 C:\Aplicada2\CobrosParcial\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Metadata.dll
 C:\Aplicada2\CobrosParcial\bin\Debug\netcoreapp3.1\Microsoft.JSInterop.dll
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\CDeudas.razor.g.cs
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\CDeudas.razor.g.cs
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\CCobros.razor.g.cs
+C:\Aplicada2\CobrosParcial\obj\Debug\netcoreapp3.1\Razor\Pages\CCobros.razor.g.cs

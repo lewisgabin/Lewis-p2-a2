@@ -1,0 +1,50 @@
+@page "/ConsultaCobros"
+@inject IToastService toast
+
+
+<h3>Consulta de cobros</h3>
+
+@if (cobros == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CobrosId</th>
+                <th>Fecha</th>
+                <th>Monto Cobrado</th>
+                <th>Observaciones</th>
+                <th>ClienteId</th>
+              
+
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cobro in cobros)
+            {
+                <tr>
+                    <td>@cobro.CobroId</td>
+                    <td>@cobro.Fecha.ToShortDateString()</td>
+                    <td>@cobro.MontoCobrado</td>
+                    <td>@cobro.Observaciones</td>
+                    <td>@cobro.ClienteId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+
+    private List<Cobro> cobros = new List<Cobro>();
+   
+
+    protected override void OnInitialized()
+    {
+        cobros = CobrosBLL.GetCobros();
+       
+    }
+}

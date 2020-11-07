@@ -55,5 +55,43 @@ namespace CobrosParcial.BLL
 
             return cobro;
         }
+
+            public static List<Ventas> GetVentas()
+        {
+            List<Ventas> lista = new List<Ventas>();
+            Contexto contexto = new Contexto();
+            try
+            {
+                lista = contexto.Venta.ToList();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return lista;
+        }
+
+          public static List<Cobro> GetCobros() {
+            Contexto contexto = new Contexto();
+
+            List<Cobro> cobros = new List<Cobro>();
+
+            try {
+                cobros = contexto.Cobro.Include(c => c.detalle).ToList();
+            } catch (Exception) {
+
+                throw;
+            } finally {
+               contexto.Dispose();
+            }
+
+            return cobros;
+
+        }
     }
 }

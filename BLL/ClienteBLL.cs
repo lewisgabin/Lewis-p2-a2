@@ -51,5 +51,27 @@ namespace CobrosParcial.BLL
             }
             return lista;
         }
+
+        
+        public async static Task<List<Clientes>> GetClientes() {
+            Contexto contexto = new Contexto();
+
+            List<Clientes> clientes = new List<Clientes>();
+            await Task.Delay(01); //Para dar tiempo a renderizar el mensaje de carga
+
+            try {
+
+                clientes = await contexto.Cliente.ToListAsync();
+
+            } catch (Exception) {
+
+                throw;
+            } finally {
+                await contexto.DisposeAsync();
+            }
+
+            return clientes;
+
+        }
     }
 }

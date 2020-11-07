@@ -1,0 +1,46 @@
+@page "/ConsultaDeudas"
+
+<h3>Consulta deudas</h3>
+
+@if (ventas == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>VentaId</th>
+                <th>Fecha</th>
+                <th>ClienteId</th>
+                <th>Monto</th>
+                <th>Balance</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var venta in ventas)
+            {
+                <tr>
+                    <td>@venta.VentaId</td>
+                    <td>@venta.Fecha.ToShortDateString()</td>
+                    <td>@venta.ClienteId</td>
+                    <td>@venta.Monto</td>
+                    <td>@venta.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+
+    private List<Ventas> ventas = new List<Ventas>();
+   
+
+    protected override void OnInitialized()
+    {
+        ventas = CobrosBLL.GetVentas();
+       
+    }
+}
